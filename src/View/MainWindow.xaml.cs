@@ -11,18 +11,30 @@ namespace View
         {
             InitializeComponent();
 
+            /*var game = IGame.Parse(new List<string> {
+              "..........",
+              ".*....*...",
+              "..........",
+              "...*....*.",
+              "**...**...",
+              "..........",
+              ".*....*...",
+              "..........",
+              "...*....*.",
+              "**...**..."
+            });*/
+
             var game = IGame.Parse(new List<string> {
-              "..........",
-              ".*....*...",
-              "..........",
-              "...*....*.",
-              "**...**...",
-              "..........",
-              ".*....*...",
-              "..........",
-              "...*....*.",
-              "**...**...",
+              "..**.",
+              ".....",
+              ".....",
+              ".***.",
+              ".***."
             });
+
+            game = game.UncoverSquare(new Vector2D(1, 0));
+            game = game.ToggleFlag(new Vector2D(2, 0));
+            game = game.UncoverSquare(new Vector2D(3, 0));
 
             this.boardView.ItemsSource = Rows(game.Board);
         }
