@@ -9,8 +9,12 @@ namespace View
         {
             InitializeComponent();
 
-            var items = new List<string> { "a", "b", "c", "d", "e" };
-            boardView.ItemsSource = items;
+            var row1 = new List<string> { "a", "b", "c", "d", "e" };
+            var row2 = new List<string> { "e", "f", "g", "h", "i" };
+            var row3 = new List<string> { "j", "k", "l", "m", "n" };
+            var grid = new List<List<string>> { row1, row2, row3 };
+
+            this.boardView.ItemsSource = grid;
         }
     }
 }

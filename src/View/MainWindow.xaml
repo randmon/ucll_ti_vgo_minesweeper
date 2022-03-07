@@ -10,14 +10,27 @@
         <ItemsControl x:Name="boardView">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding .}"/>
+                    
+                    <ItemsControl>
+
+
+                        <ItemsControl ItemsSource="{Binding .}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="x"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </ItemsControl>
+                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
         </ItemsControl>
     </Grid>
 </Window>
