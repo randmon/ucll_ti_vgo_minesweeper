@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ItemsControl x:Name="boardView"></ItemsControl>
+        <ItemsControl x:Name="boardView">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="Click me"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>
