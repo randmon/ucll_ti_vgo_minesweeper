@@ -10,9 +10,14 @@
         <ItemsControl x:Name="boardView">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="Click me"/>
+                    <Button Content="{Binding .}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
         </ItemsControl>
     </Grid>
 </Window>
