@@ -6,14 +6,17 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <ItemsControl x:Name="boardView">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    
                     <ItemsControl>
-
-
                         <ItemsControl ItemsSource="{Binding .}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -22,13 +25,12 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="x"/>
+                                    <Button Content="{Binding .}"
+                                            Style="{StaticResource buttonStyle}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-
                     </ItemsControl>
-                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
