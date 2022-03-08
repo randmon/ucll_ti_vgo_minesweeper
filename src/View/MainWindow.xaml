@@ -13,9 +13,6 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Button Style="{StaticResource buttonStyle}">
-            
-        </Button>
         <ItemsControl x:Name="boardView">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
