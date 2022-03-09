@@ -53,7 +53,7 @@
                                         <Button.Content>
                                             <Grid>
                                                 <Ellipse Width="20" Height="20" Fill="{Binding Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
-                                                <TextBlock Text="0" 
+                                                <TextBlock Text="{Binding NeighboringMineCount}" 
                                                            Style="{StaticResource numberStyle}"
                                                            Visibility="{Binding Status, Converter={StaticResource squareStatusToText}}"/>
                                             </Grid>
