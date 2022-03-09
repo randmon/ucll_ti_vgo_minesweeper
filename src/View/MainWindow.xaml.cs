@@ -32,7 +32,7 @@ namespace View
               ".***."
             });
 
-            game = game.UncoverSquare(new Vector2D(1, 0));
+            game = game.UncoverSquare(new Vector2D(0, 0));
             game = game.ToggleFlag(new Vector2D(2, 0));
             game = game.UncoverSquare(new Vector2D(3, 0)); //Uncover with bomb, ends game!
 
@@ -42,7 +42,7 @@ namespace View
         public IEnumerable<Square> Row(IGameBoard board, int row)
         {
             List<Square> result = new List<Square>();
-            for (int i = 0; i < board.Height; i++)
+            for (int i = 0; i < board.Width; i++)
             {
                 var position = new Vector2D(i, row);
                 result.Add(board[position]);
@@ -53,7 +53,7 @@ namespace View
         public IEnumerable<IEnumerable<Square>> Rows(IGameBoard board)
         {
             List<IEnumerable<Square>> result = new List<IEnumerable<Square>>();
-            for (int i = 0; i < board.Width; i++)
+            for (int i = 0; i < board.Height; i++)
             {
                 result.Add(Row(board, i));
             }

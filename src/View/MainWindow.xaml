@@ -11,12 +11,30 @@
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFFFFFFF" Offset="0" />
+                        <GradientStop Color="#FFD4D7DB" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="numberStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
         </Style>
         <converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"
                                           Uncovered="Transparent"
                                           Covered="Transparent"
                                           Flagged="Orange"
                                           Mine="Black"/>
+        <converters:SquareStatusConverter x:Key="squareStatusToText"
+                                          Uncovered="Visible"
+                                          Covered="Hidden"
+                                          Flagged="Hidden"
+                                          Mine="Hidden"/>
     </Window.Resources>
     <Grid>
         <ItemsControl x:Name="boardView">
@@ -33,7 +51,12 @@
                                 <DataTemplate>
                                     <Button Style="{StaticResource buttonStyle}">
                                         <Button.Content>
-                                            <Ellipse Width="20" Height="20" Fill="{Binding Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
+                                            <Grid>
+                                                <Ellipse Width="20" Height="20" Fill="{Binding Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
+                                                <TextBlock Text="0" 
+                                                           Style="{StaticResource numberStyle}"
+                                                           Visibility="{Binding Status, Converter={StaticResource squareStatusToText}}"/>
+                                            </Grid>
                                         </Button.Content>
                                     </Button>
                                 </DataTemplate>
