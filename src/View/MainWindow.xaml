@@ -12,7 +12,11 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
-        <converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"/>
+        <converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"
+                                          Uncovered="Transparent"
+                                          Covered="Transparent"
+                                          Flagged="Orange"
+                                          Mine="Black"/>
     </Window.Resources>
     <Grid>
         <ItemsControl x:Name="boardView">

@@ -2,25 +2,29 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace View.Converters
 {
     public class SquareStatusConverter : IValueConverter
     {
+        public object Uncovered { get; set; }
+        public object Covered { get; set; }
+        public object Flagged { get; set; }
+        public object Mine { get; set; }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SquareStatus status = (SquareStatus) value;
+            SquareStatus status = (SquareStatus)value;
             switch (status)
             {
                 case SquareStatus.Covered:
-                    return Brushes.Transparent;
+                    return Covered;
                 case SquareStatus.Flagged:
-                    return Brushes.Orange;
+                    return Flagged;
                 case SquareStatus.Mine:
-                    return Brushes.Black;
+                    return Mine;
                 case SquareStatus.Uncovered:
-                    return Brushes.Transparent;
+                    return Uncovered;
                 default:
                     throw new ArgumentException("Invalid square status at converter");
             }
