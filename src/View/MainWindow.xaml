@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
+        xmlns:converters="clr-namespace:View.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -11,6 +12,7 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
+        <converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"/>
     </Window.Resources>
     <Grid>
         <ItemsControl x:Name="boardView">
@@ -27,7 +29,7 @@
                                 <DataTemplate>
                                     <Button Style="{StaticResource buttonStyle}">
                                         <Button.Content>
-                                            <Ellipse Width="20" Height="20" Fill="Black"/>
+                                            <Ellipse Width="20" Height="20" Fill="{Binding Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
                                         </Button.Content>
                                     </Button>
                                 </DataTemplate>
