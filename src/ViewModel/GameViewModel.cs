@@ -1,4 +1,5 @@
-﻿using Model.MineSweeper;
+﻿using Cells;
+using Model.MineSweeper;
 
 namespace ViewModel
 {
@@ -6,7 +7,9 @@ namespace ViewModel
     {
         public GameViewModel(IGame game)
         {
-            Board = new GameBoardViewModel(game);
+            ICell<IGame> gameCell = Cell.Create(game);
+            ICell<IGameBoard> board = gameCell.Derive(g => g.Board);
+            Board = new GameBoardViewModel(gameCell);
         }
 
         public GameBoardViewModel Board { get; }

@@ -33,9 +33,9 @@ namespace View
               ".***."
             });
 
-            game = game.UncoverSquare(new Vector2D(0, 0));
-            game = game.ToggleFlag(new Vector2D(2, 0));
-            game = game.UncoverSquare(new Vector2D(3, 0)); //Uncover with bomb, ends game!
+            //game = game.UncoverSquare(new Vector2D(0, 0));
+            //game = game.ToggleFlag(new Vector2D(2, 0));
+            //game = game.UncoverSquare(new Vector2D(3, 0)); //Uncover with bomb, ends game!
 
             GameViewModel gameViewModel = new GameViewModel(game);
             this.DataContext = gameViewModel;

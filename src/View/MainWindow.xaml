@@ -52,10 +52,10 @@
                                     <Button Style="{StaticResource buttonStyle}" Command="{Binding Uncover}">
                                         <Button.Content>
                                             <Grid>
-                                                <Ellipse Width="20" Height="20" Fill="{Binding Square.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
-                                                <TextBlock Text="{Binding Square.NeighboringMineCount}" 
+                                                <Ellipse Width="20" Height="20" Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
+                                                <TextBlock Text="{Binding Square.Value.NeighboringMineCount}" 
                                                            Style="{StaticResource numberStyle}"
-                                                           Visibility="{Binding Square.Status, Converter={StaticResource squareStatusToText}}"/>
+                                                           Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
                                             </Grid>
                                         </Button.Content>
                                     </Button>
