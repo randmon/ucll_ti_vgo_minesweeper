@@ -7,9 +7,9 @@ namespace ViewModel
     public class SquareViewModel
     {
         public Square Square { get; }
-        public SquareViewModel(Square square, IGame game, Vector2D position)
+        public SquareViewModel(IGame game, Vector2D position)
         {
-            Square = square;
+            Square = game.Board[position];
             Uncover = new UncoverSquareCommand(game, position);
         }
 

@@ -19,19 +19,7 @@ namespace ViewModel
             List<RowViewModel> result = new List<RowViewModel>();
             for (int i = 0; i < _board.Height; i++)
             {
-                result.Add(new RowViewModel(Row(i, game), game, i));
-            }
-            return result;
-        }
-
-
-        private IEnumerable<SquareViewModel> Row(int row, IGame game)
-        {
-            List<SquareViewModel> result = new List<SquareViewModel>();
-            for (int i = 0; i < _board.Width; i++)
-            {
-                var position = new Vector2D(i, row);
-                result.Add(new SquareViewModel(_board[position], game, position));
+                result.Add(new RowViewModel(game, i));
             }
             return result;
         }
