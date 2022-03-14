@@ -1,4 +1,5 @@
-﻿using Model.MineSweeper;
+﻿using Model.Data;
+using Model.MineSweeper;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -7,9 +8,11 @@ namespace ViewModel
     internal class UncoverSquareCommand : ICommand
     {
         public IGame Game { get; }
-        public UncoverSquareCommand(IGame game)
+        public Vector2D Position { get; }
+        public UncoverSquareCommand(IGame game, Vector2D position)
         {
             Game = game;
+            Position = position;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -21,7 +24,7 @@ namespace ViewModel
 
         public void Execute(object? parameter)
         {
-            Debug.WriteLine("You clicked me");
+            Debug.WriteLine(Position);
         }
     }
 }
