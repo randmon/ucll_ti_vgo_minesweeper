@@ -52,10 +52,10 @@
                                     <Button Style="{StaticResource buttonStyle}">
                                         <Button.Content>
                                             <Grid>
-                                                <Ellipse Width="20" Height="20" Fill="{Binding Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
-                                                <TextBlock Text="{Binding NeighboringMineCount}" 
+                                                <Ellipse Width="20" Height="20" Fill="{Binding Square.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
+                                                <TextBlock Text="{Binding Square.NeighboringMineCount}" 
                                                            Style="{StaticResource numberStyle}"
-                                                           Visibility="{Binding Status, Converter={StaticResource squareStatusToText}}"/>
+                                                           Visibility="{Binding Square.Status, Converter={StaticResource squareStatusToText}}"/>
                                             </Grid>
                                         </Button.Content>
                                     </Button>

@@ -25,13 +25,13 @@ namespace ViewModel
         }
 
 
-        private IEnumerable<Square> Row(int row)
+        private IEnumerable<SquareViewModel> Row(int row)
         {
-            List<Square> result = new List<Square>();
+            List<SquareViewModel> result = new List<SquareViewModel>();
             for (int i = 0; i < _board.Width; i++)
             {
                 var position = new Vector2D(i, row);
-                result.Add(_board[position]);
+                result.Add(new SquareViewModel(_board[position]));
             }
             return result;
         }
