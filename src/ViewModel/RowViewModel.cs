@@ -5,7 +5,7 @@ namespace ViewModel
     public class RowViewModel
     {
         public IEnumerable<SquareViewModel> Squares { get; }
-        public RowViewModel(IEnumerable<SquareViewModel> squares)
+        public RowViewModel(IEnumerable<SquareViewModel> squares, IGame game)
         {
             Squares = squares;
         }

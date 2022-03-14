@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model.MineSweeper;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ViewModel
 {
     internal class UncoverSquareCommand : ICommand
     {
+        public IGame Game { get; }
+        public UncoverSquareCommand(IGame game)
+        {
+            Game = game;
+        }
+
         public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object? parameter)

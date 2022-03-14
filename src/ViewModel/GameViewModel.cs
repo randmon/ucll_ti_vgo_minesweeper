@@ -8,7 +8,7 @@ namespace ViewModel
         public GameViewModel(IGame game)
         {
             _game = game;
-            Board = new GameBoardViewModel(game.Board);
+            Board = new GameBoardViewModel(game);
         }
 
         public GameBoardViewModel Board { get; }
