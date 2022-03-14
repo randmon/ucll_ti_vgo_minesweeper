@@ -36,7 +36,7 @@ namespace View
             game = game.ToggleFlag(new Vector2D(2, 0));
             game = game.UncoverSquare(new Vector2D(3, 0)); //Uncover with bomb, ends game!
 
-            this.boardView.ItemsSource = Rows(game.Board);
+            this.DataContext = Rows(game.Board);
         }
 
         public IEnumerable<Square> Row(IGameBoard board, int row)
