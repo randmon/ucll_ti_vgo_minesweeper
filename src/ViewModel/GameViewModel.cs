@@ -1,5 +1,4 @@
-﻿using Model.Data;
-using Model.MineSweeper;
+﻿using Model.MineSweeper;
 
 namespace ViewModel
 {
@@ -9,31 +8,9 @@ namespace ViewModel
         public GameViewModel(IGame game)
         {
             _game = game;
-            Rows = GetRows();
-         }
-
-        public IEnumerable<IEnumerable<Square>> Rows { get; }
-
-        public IEnumerable<IEnumerable<Square>> GetRows()
-        {
-            List<IEnumerable<Square>> result = new List<IEnumerable<Square>>();
-            for (int i = 0; i < _game.Board.Height; i++)
-            {
-                result.Add(Row(i));
-            }
-            return result;
+            Board = new GameBoardViewModel(game.Board);
         }
 
-
-        public IEnumerable<Square> Row(int row)
-        {
-            List<Square> result = new List<Square>();
-            for (int i = 0; i < _game.Board.Width; i++)
-            {
-                var position = new Vector2D(i, row);
-                result.Add(_game.Board[position]);
-            }
-            return result;
-        }
+        public GameBoardViewModel Board { get; }
     }
 }
