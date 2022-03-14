@@ -49,7 +49,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource buttonStyle}">
+                                    <Button Style="{StaticResource buttonStyle}" Command="{Binding Uncover}">
                                         <Button.Content>
                                             <Grid>
                                                 <Ellipse Width="20" Height="20" Fill="{Binding Square.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>

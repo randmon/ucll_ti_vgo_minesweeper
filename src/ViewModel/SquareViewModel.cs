@@ -1,4 +1,5 @@
 ﻿using Model.MineSweeper;
+using System.Windows.Input;
 
 namespace ViewModel
 {
@@ -8,6 +9,9 @@ namespace ViewModel
         public SquareViewModel(Square square)
         {
             Square = square;
+            Uncover = new UncoverSquareCommand();
         }
+
+        public ICommand Uncover { get; }
     }
 }
