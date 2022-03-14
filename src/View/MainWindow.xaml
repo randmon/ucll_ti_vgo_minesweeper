@@ -41,7 +41,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ItemsControl>
-                        <ItemsControl ItemsSource="{Binding .}">
+                        <ItemsControl ItemsSource="{Binding Squares}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>

@@ -12,14 +12,14 @@ namespace ViewModel
             _board = board;
             Rows = GetRows();
         }
-        public IEnumerable<IEnumerable<Square>> Rows { get; }
+        public IEnumerable<RowViewModel> Rows { get; }
 
-        private IEnumerable<IEnumerable<Square>> GetRows()
+        private IEnumerable<RowViewModel> GetRows()
         {
-            List<IEnumerable<Square>> result = new List<IEnumerable<Square>>();
+            List<RowViewModel> result = new List<RowViewModel>();
             for (int i = 0; i < _board.Height; i++)
             {
-                result.Add(Row(i));
+                result.Add(new RowViewModel(Row(i)));
             }
             return result;
         }
