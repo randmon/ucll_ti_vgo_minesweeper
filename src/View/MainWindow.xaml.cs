@@ -1,6 +1,4 @@
-﻿using Model.MineSweeper;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using ViewModel;
 
 namespace View
@@ -10,30 +8,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-
-            /*var game = IGame.Parse(new List<string> {
-              "..........",
-              ".*....*...",
-              "..........",
-              "...*....*.",
-              "**...**...",
-              "..........",
-              ".*....*...",
-              "..........",
-              "...*....*.",
-              "**...**..."
-            });*/
-
-            var game = IGame.Parse(new List<string> {
-              "..**.",
-              ".....",
-              ".....",
-              ".***.",
-              ".***."
-            });
-
-            GameViewModel gameViewModel = new GameViewModel(game);
-            this.DataContext = gameViewModel;
+            this.DataContext = new MainViewModel();
         }        
     }
 }
