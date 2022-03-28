@@ -10,17 +10,22 @@ namespace ViewModel
     {
         public ICell<IGame> Game { get; }
         public Vector2D Position { get; }
-        public UncoverSquareCommand(ICell<IGame> game, Vector2D position)
+
+        private ICell<bool> enabled { get; set; }
+
+        public UncoverSquareCommand(ICell<IGame> game, Vector2D position, ICell<bool> enabled)
         {
             Game = game;
             Position = position;
+            this.enabled = enabled;
+            enabled.ValueChanged += () => CanExecuteChanged?.Invoke(null, new EventArgs());
         }
 
         public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return enabled.Value;
         }
 
         public void Execute(object? parameter)
