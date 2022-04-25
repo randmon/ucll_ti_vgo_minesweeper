@@ -62,6 +62,10 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Button Style="{StaticResource buttonStyle}" Command="{Binding Uncover}">
+                                            <Button.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding Uncover}"/>
+                                                <MouseBinding Gesture="RightClick" Command="{Binding Flag}"/>
+                                            </Button.InputBindings>
                                             <Button.Content>
                                                 <Grid>
                                                     <Ellipse Width="20" Height="20" Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>

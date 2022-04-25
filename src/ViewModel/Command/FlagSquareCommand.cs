@@ -4,16 +4,16 @@ using Model.MineSweeper;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace ViewModel
+namespace ViewModel.Command
 {
-    internal class UncoverSquareCommand : ICommand
+    public class FlagSquareCommand : ICommand
     {
         public ICell<IGame> Game { get; }
         public Vector2D Position { get; }
 
         private ICell<bool> enabled { get; set; }
 
-        public UncoverSquareCommand(ICell<IGame> game, Vector2D position, ICell<bool> enabled)
+        public FlagSquareCommand(ICell<IGame> game, Vector2D position, ICell<bool> enabled)
         {
             Game = game;
             Position = position;
@@ -30,7 +30,7 @@ namespace ViewModel
 
         public void Execute(object? parameter)
         {
-            Game.Value = Game.Value.UncoverSquare(Position);
+            Game.Value = Game.Value.ToggleFlag(Position);
         }
     }
 }
