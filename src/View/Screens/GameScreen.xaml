@@ -48,8 +48,10 @@
                                           Mine="Hidden"/>
         <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"/>
     </UserControl.Resources>
-    <StackPanel>
-        <Grid>
+    <StackPanel HorizontalAlignment="Center">
+        <Button Style="{StaticResource settingsButtonStyle}" Content="Menu"
+                Command="{Binding ShowSettings}"/>
+        <Grid Margin="20">
             <ItemsControl ItemsSource="{Binding Game.Board.Rows}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -84,7 +86,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Button Style="{StaticResource settingsButtonStyle}" Content="Settings"
-                Command="{Binding ShowSettings}"/>
     </StackPanel>
 </UserControl>

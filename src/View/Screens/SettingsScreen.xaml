@@ -20,7 +20,19 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel HorizontalAlignment="Center" Height="300">
+        <!--Row with slider and text field for width and height-->
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Size:"/>
+            
+            <TextBox Text="{Binding Width.Value, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="50" TextWrapping="Wrap" />
+            <Slider Value="{Binding Width.Value}" Margin="5,0,0,0" Width="200" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}"/>
+        </StackPanel>
+
+        <!--Checkbox to enable flooding-->
+        <CheckBox IsChecked="{Binding Flooding.Value}" Content="Flood" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20"/>
+
+        <!--Play button-->
         <Button Style="{StaticResource settingsButtonStyle}" Content="Play"
                 Command="{Binding ShowGame}"/>
     </StackPanel>

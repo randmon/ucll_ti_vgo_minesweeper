@@ -9,7 +9,7 @@ namespace ViewModel
         public MainViewModel()
         {
             CurrentScreen = Cell.Create<ScreenViewModel>(null);
-            var firstScreen = new GameScreenViewModel(CurrentScreen);
+            var firstScreen = new SettingsScreenViewModel(CurrentScreen);
             CurrentScreen.Value = firstScreen;
         }
 
@@ -20,7 +20,7 @@ namespace ViewModel
     {
         protected ScreenViewModel(ICell<ScreenViewModel> currentScreen)
         {
-            this.CurrentScreen = currentScreen;
+            CurrentScreen = currentScreen;
         }
 
         protected ICell<ScreenViewModel> CurrentScreen { get; }
@@ -28,16 +28,8 @@ namespace ViewModel
 
     public class GameScreenViewModel : ScreenViewModel
     {
-        public GameScreenViewModel(ICell<ScreenViewModel> currentScreen) : base(currentScreen)
+        public GameScreenViewModel(ICell<ScreenViewModel> currentScreen, IGame game) : base(currentScreen)
         {
-            var game = IGame.Parse(new List<string> {
-              "..**.",
-              ".....",
-              ".....",
-              ".***.",
-              ".***."
-            });
-
             Game = new GameViewModel(game);
 
             ShowSettings = new ActionCommand(() => CurrentScreen.Value = new SettingsScreenViewModel(this.CurrentScreen));
@@ -50,11 +42,30 @@ namespace ViewModel
 
     public class SettingsScreenViewModel : ScreenViewModel
     {
+        public ICell<int> Width { get; }
+        public ICell<bool> Flooding { get; }
+
+        public int MaxSize { get; }
+        public int MinSize { get; }
+
         public SettingsScreenViewModel(ICell<ScreenViewModel> currentScreen) : base(currentScreen)
         {
-            ShowGame = new ActionCommand(() => CurrentScreen.Value = new GameScreenViewModel(this.CurrentScreen));
+            this.Width = Cell.Create<int>(10);
+            this.Flooding = Cell.Create<bool>(true);
+
+            this.MaxSize = IGame.MaximumBoardSize;
+            this.MinSize = IGame.MinimumBoardSize;
+
+            ShowGame = new ActionCommand(startGame);
         }
         public ICommand ShowGame { get; }
+
+        private void startGame()
+        {
+            double mineProbability = 0.1;
+            var game = IGame.CreateRandom(Width.Value, mineProbability, Flooding.Value);
+            CurrentScreen.Value = new GameScreenViewModel(this.CurrentScreen, game);
+        }
 
     }
 
