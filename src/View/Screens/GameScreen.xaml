@@ -13,8 +13,8 @@
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                        <GradientStop Color="#FFD4D7DB" Offset="1" />
+                        <GradientStop Color="#FFFFFF" Offset="0" />
+                        <GradientStop Color="#aeb5b8" Offset="1" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -46,6 +46,7 @@
                                           Covered="Hidden"
                                           Flagged="Hidden"
                                           Mine="Hidden"/>
+        <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"/>
     </UserControl.Resources>
     <StackPanel>
         <Grid>
@@ -69,7 +70,7 @@
                                             <Button.Content>
                                                 <Grid>
                                                     <Ellipse Width="20" Height="20" Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
-                                                    <TextBlock Text="{Binding Square.Value.NeighboringMineCount}" 
+                                                    <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
                                                                 Style="{StaticResource numberStyle}"
                                                                 Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
                                                 </Grid>
