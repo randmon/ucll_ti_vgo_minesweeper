@@ -8,7 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converters\SquareStatusConverter - Copy.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="flag.png" />
+    <None Remove="mine.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="flag.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="mine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

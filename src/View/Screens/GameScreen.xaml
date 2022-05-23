@@ -36,11 +36,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"
+        <!--<converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"
                                           Uncovered="Transparent"
                                           Covered="Transparent"
                                           Flagged="Orange"
-                                          Mine="Black"/>
+                                          Mine="Black"/>-->
+        <converters:SquareStatusConverter x:Key="squareStatusToImage"
+                                          Flagged="/flag.png"
+                                          Mine="/mine.png"/>
         <converters:SquareStatusConverter x:Key="squareStatusToText"
                                           Uncovered="Visible"
                                           Covered="Hidden"
@@ -71,7 +74,9 @@
                                             </Button.InputBindings>
                                             <Button.Content>
                                                 <Grid>
-                                                    <Ellipse Width="20" Height="20" Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>
+                                                    <Image Source="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>
+                                                    <!--<Ellipse Width="20" Height="20" 
+                                                             Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>-->
                                                     <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
                                                                 Style="{StaticResource numberStyle}"
                                                                 Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.Screens"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -23,14 +22,13 @@
     <StackPanel HorizontalAlignment="Center" Height="300">
         <!--Row with slider and text field for width and height-->
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Size:"/>
-            
-            <TextBox Text="{Binding Width.Value, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="50" TextWrapping="Wrap" />
+            <Label Content="Size:"></Label>
+            <TextBlock Text="{Binding Width.Value}" Margin="10,0,0,0" Width="50"/>
             <Slider Value="{Binding Width.Value}" Margin="5,0,0,0" Width="200" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}"/>
         </StackPanel>
 
         <!--Checkbox to enable flooding-->
-        <CheckBox IsChecked="{Binding Flooding.Value}" Content="Flood" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20"/>
+        <CheckBox IsChecked="{Binding Flooding.Value}" Content="Flooding" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20"/>
 
         <!--Play button-->
         <Button Style="{StaticResource settingsButtonStyle}" Content="Play"

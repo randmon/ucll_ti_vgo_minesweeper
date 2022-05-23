@@ -30,7 +30,10 @@ namespace ViewModel.Command
 
         public void Execute(object? parameter)
         {
-            Game.Value = Game.Value.ToggleFlag(Position);
+            if (Game.Value.Status == GameStatus.InProgress)
+            {
+                Game.Value = Game.Value.ToggleFlag(Position);
+            }
         }
     }
 }
