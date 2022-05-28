@@ -6,8 +6,7 @@
         xmlns:screens="clr-namespace:View.Screens"
         xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+        Title="MainWindow" Height="800" Width="800">
     <ContentControl  Content="{Binding CurrentScreen.Value}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewModel:GameScreenViewModel}">

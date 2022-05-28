@@ -6,57 +6,158 @@
              xmlns:converters="clr-namespace:View.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="32"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FFFFFF" Offset="0" />
-                        <GradientStop Color="#aeb5b8" Offset="1" />
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="numberStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
-        </Style>
-        <Style x:Key="settingsButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                        <GradientStop Color="#FFD4D7DB" Offset="1" />
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!--<converters:SquareStatusConverter x:Key="squareStatusToEllipseFill"
-                                          Uncovered="Transparent"
-                                          Covered="Transparent"
-                                          Flagged="Orange"
-                                          Mine="Black"/>-->
-        <converters:SquareStatusConverter x:Key="squareStatusToImage"
-                                          Flagged="/flag.png"
-                                          Mine="/mine.png"/>
-        <converters:SquareStatusConverter x:Key="squareStatusToText"
-                                          Uncovered="Visible"
-                                          Covered="Hidden"
-                                          Flagged="Hidden"
-                                          Mine="Hidden"/>
-        <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"/>
+<UserControl.Resources>
+    <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                            x:Name="Border" CornerRadius="1" BorderThickness="1">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0"
+                                EndPoint="0,1">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStopCollection>
+                                        <GradientStop Color="SlateBlue" Offset="0.0" />
+                                        <GradientStop Color="DarkSlateBlue" Offset="1.0" />
+                                    </GradientStopCollection>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="LightBlue" Offset="0" />
+                                <GradientStop Color="MediumSlateBlue" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.3" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" 
+                                                                        Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="White" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                                        Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FFC5CBF9" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+        
+    <Style x:Key="numberStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="DarkSlateBlue"/>
+        <Setter Property="FontFamily" Value="Courier New"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+        
+    <Style x:Key="settingsButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="SlateBlue"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Courier New"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="DarkSlateBlue"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+        
+    <Style x:Key="backgroundStyle" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="#171721"/>
+    </Style>
+
+    <Style x:Key="winLoseStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Courier New"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    
+    <converters:SquareStatusConverter x:Key="squareStatusToImage"
+                                        Flagged="/img/flag.png"
+                                        Mine="/img/mine.png"/>
+    
+    <converters:SquareStatusConverter x:Key="squareStatusToText"
+                                        Uncovered="Visible"
+                                        Covered="Hidden"
+                                        Flagged="Hidden"
+                                        Mine="Hidden"/>
+
+    <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"/>
+
+    <converters:GameStatusConverter x:Key="gameStatusToText"
+                                    Lost="You Lost!"
+                                    Won="You won!"/>
+    
+    <converters:GameStatusConverter x:Key="gameStatusToTextVisibility"
+                                    InProgress="Hidden"
+                                    Lost="Visible"
+                                    Won="Visible"/>
+
     </UserControl.Resources>
-    <StackPanel HorizontalAlignment="Center">
-        <Button Style="{StaticResource settingsButtonStyle}" Content="Menu"
-                Command="{Binding ShowSettings}"/>
-        <Grid Margin="20">
-            <ItemsControl ItemsSource="{Binding Game.Board.Rows}">
-                <ItemsControl.ItemTemplate>
+<Grid Style="{StaticResource backgroundStyle}">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"></ColumnDefinition>
+        <ColumnDefinition Width="3*"></ColumnDefinition>
+        <ColumnDefinition Width="1*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="6*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Viewbox Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="0">
+        <Button Style="{StaticResource settingsButtonStyle}" Content="Settings"
+            Command="{Binding ShowSettings}"/>
+    </Viewbox>
+
+    <Viewbox Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1">
+            <TextBlock Text="{Binding Game.Status.Value, Converter={StaticResource gameStatusToText}}" 
+                       Style="{StaticResource winLoseStyle}"
+                       Visibility="{Binding Game.Status.Value, Converter={StaticResource gameStatusToTextVisibility}}"/>
+    </Viewbox>
+
+    <Viewbox Grid.Column="1" Grid.Row="2" >
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Game.Board.Rows}">
+            <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ItemsControl>
                             <ItemsControl ItemsSource="{Binding Squares}">
@@ -75,11 +176,9 @@
                                             <Button.Content>
                                                 <Grid>
                                                     <Image Source="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>
-                                                    <!--<Ellipse Width="20" Height="20" 
-                                                             Fill="{Binding Square.Value.Status, Converter={StaticResource squareStatusToEllipseFill}}"/>-->
                                                     <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
-                                                                Style="{StaticResource numberStyle}"
-                                                                Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
+                                                            Style="{StaticResource numberStyle}"
+                                                            Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
                                                 </Grid>
                                             </Button.Content>
                                         </Button>
@@ -91,5 +190,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-    </StackPanel>
+    </Viewbox>
+</Grid>
 </UserControl>

@@ -35,6 +35,5 @@ namespace ViewModel
 
         public ICell<IGame> Game { get; }
         public ICell<SquareStatus> Status { get; set; }
-
     }
 }

@@ -5,22 +5,20 @@ using System.Windows.Data;
 
 namespace View.Converters
 {
-    public class SquareStatusConverter : IValueConverter
+    public class GameStatusConverter : IValueConverter
     {
-        public object Uncovered { get; set; }
-        public object Covered { get; set; }
-        public object Flagged { get; set; }
-        public object Mine { get; set; }
+        public object InProgress { get; set; }
+        public object Won { get; set; }
+        public object Lost { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SquareStatus status = (SquareStatus)value;
+            GameStatus status = (GameStatus)value;
             return status switch
             {
-                SquareStatus.Covered => Covered,
-                SquareStatus.Flagged => Flagged,
-                SquareStatus.Mine => Mine,
-                SquareStatus.Uncovered => Uncovered,
+                GameStatus.InProgress => InProgress,
+                GameStatus.Won => Won,
+                GameStatus.Lost => Lost,
                 _ => throw new ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }

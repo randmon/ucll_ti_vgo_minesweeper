@@ -9,13 +9,11 @@ namespace View.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int mineCount = (int)value;
-            switch (mineCount)
+            return mineCount switch
             {
-                case 0:
-                    return "";
-                default:
-                    return value;
-            }
+                0 => "",
+                _ => value,
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

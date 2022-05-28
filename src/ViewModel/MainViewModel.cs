@@ -56,11 +56,11 @@ namespace ViewModel
             this.MaxSize = IGame.MaximumBoardSize;
             this.MinSize = IGame.MinimumBoardSize;
 
-            ShowGame = new ActionCommand(startGame);
+            ShowGame = new ActionCommand(StartGame);
         }
         public ICommand ShowGame { get; }
 
-        private void startGame()
+        private void StartGame()
         {
             double mineProbability = 0.1;
             var game = IGame.CreateRandom(Width.Value, mineProbability, Flooding.Value);

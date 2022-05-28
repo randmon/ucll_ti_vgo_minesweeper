@@ -8,18 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+    <Page Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Converters\SquareStatusConverter - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="flag.png" />
+    <None Remove="img\flag.png" />
+    <None Remove="img\flag1.png" />
+    <None Remove="img\mine.png" />
     <None Remove="mine.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="flag.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="mine.png">
+    <Resource Include="img\flag.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\mine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -9,6 +9,8 @@
         <Style x:Key="settingsButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="30"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -18,13 +20,27 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="titleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="labelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
     </UserControl.Resources>
-    <StackPanel HorizontalAlignment="Center" Height="300">
+    <Viewbox>
+    <StackPanel HorizontalAlignment="Center">
+        <TextBlock Style="{StaticResource titleStyle}">Minesweeper</TextBlock>
         <!--Row with slider and text field for width and height-->
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Size:"></Label>
-            <TextBlock Text="{Binding Width.Value}" Margin="10,0,0,0" Width="50"/>
-            <Slider Value="{Binding Width.Value}" Margin="5,0,0,0" Width="200" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}"/>
+        <StackPanel Margin="30" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource labelStyle}">Size:</TextBlock>
+            <TextBlock Text="{Binding Width.Value}" Style="{StaticResource labelStyle}"/>
+            <Slider Value="{Binding Width.Value}" Width="150" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}"/>
         </StackPanel>
 
         <!--Checkbox to enable flooding-->
@@ -34,4 +50,5 @@
         <Button Style="{StaticResource settingsButtonStyle}" Content="Play"
                 Command="{Binding ShowGame}"/>
     </StackPanel>
+    </Viewbox>
 </UserControl>
