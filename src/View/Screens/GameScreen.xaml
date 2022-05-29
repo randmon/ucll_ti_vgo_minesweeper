@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:View.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
 <UserControl.Resources>
     <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -100,7 +100,18 @@
     </Style>
         
     <Style x:Key="backgroundStyle" TargetType="{x:Type Grid}">
-            <Setter Property="Background" Value="#171721"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Pink" Offset="-0.7" />
+                                <GradientStop Color="SlateBlue" Offset="1.0" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
     </Style>
 
     <Style x:Key="winLoseStyle" TargetType="{x:Type TextBlock}">

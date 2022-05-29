@@ -4,51 +4,288 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="settingsButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+        <Style x:Key="backgroundStyle" TargetType="{x:Type Grid}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                        <GradientStop Color="#FFD4D7DB" Offset="1" />
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="#4f5775" Offset="0.0" />
+                                <GradientStop Color="#0d0d17" Offset="1.0" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="settingsButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Pink" Offset="-0.5" />
+                                <GradientStop Color="SlateBlue" Offset="1.0" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkSlateBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="titleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="Green"/>
-            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Pink" Offset="0.0" />
+                                <GradientStop Color="Aqua" Offset="1.7" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="2"/>
         </Style>
+
         <Style x:Key="labelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="customSettingsStyle" TargetType="Grid">
+            <Setter Property="Background" Value="#22222e"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style x:Key="presetTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment"  Value="Center"/>
+        </Style>
+
+        <Style x:Key="customTitleBackground" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Pink" Offset="-1" />
+                                <GradientStop Color="SlateBlue" Offset="2.0" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="sliderStyle" TargetType="Slider">
+            <Setter Property="VerticalAlignment"  Value="Center"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+
+        <Style x:Key="checkBoxStyle" TargetType="CheckBox">
+            <Setter Property="VerticalAlignment"  Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator>
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border" Width="30" Height="30" CornerRadius="0" BorderThickness="2">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="Pink" Offset="-0.5" />
+                                                    <GradientStop Color="SlateBlue" Offset="1.0" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="#3f354a " />
+                                                    <GradientStop Color="#22222e" Offset="1.0" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Path Visibility="Collapsed" Width="30" Height="30"
+                                              x:Name="CheckMark" SnapsToDevicePixels="False"
+                                              StrokeThickness="2"
+                                              Data="M 0 0 L 30 30 M -3 30 L 27 0">
+                                            <Path.Stroke>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="Pink" Offset="-0.5" />
+                                                            <GradientStop Color="SlateBlue" Offset="1.0" />
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Path.Stroke>
+                                        </Path>
+                                    </Grid>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="DarkSlateBlue" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="InderminateMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="customBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Pink" Offset="-0.5" />
+                                <GradientStop Color="SlateBlue" Offset="1.0" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
-    <Viewbox>
-    <StackPanel HorizontalAlignment="Center">
-        <TextBlock Style="{StaticResource titleStyle}">Minesweeper</TextBlock>
-        <!--Row with slider and text field for width and height-->
-        <StackPanel Margin="30" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Style="{StaticResource labelStyle}">Size:</TextBlock>
-            <TextBlock Text="{Binding Width.Value}" Style="{StaticResource labelStyle}"/>
-            <Slider Value="{Binding Width.Value}" Width="150" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}"/>
-        </StackPanel>
+    <Grid Style="{StaticResource backgroundStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
+            <TextBlock Style="{StaticResource titleStyle}">Minesweeper</TextBlock>
+        </Viewbox>
+        <Border Style="{StaticResource customBorderStyle}" 
+                    BorderThickness="2" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="4">
+            <Grid Style="{StaticResource customSettingsStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="8*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="9*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource customTitleBackground}">
+                    <TextBlock Style="{StaticResource presetTitleStyle}">Custom</TextBlock>
+                </Grid>
+                <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid Height="193" Width="225">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--Row with slider and text field for width and height-->
+                        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource labelStyle}">Size</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Width.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
+                        <Slider Grid.Column="2" Grid.Row="0" Value="{Binding Width.Value}" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}" Style="{StaticResource sliderStyle}"/>
 
-        <!--Checkbox to enable flooding-->
-        <CheckBox IsChecked="{Binding Flooding.Value}" Content="Flooding" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20"/>
+                        <!--Row with slider and text field for mine probability-->
+                        <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource labelStyle}">Mine %</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Width.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
+                        <Slider Grid.Column="2" Grid.Row="1" Value="{Binding Width.Value}" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}" Style="{StaticResource sliderStyle}"/>
 
-        <!--Play button-->
-        <Button Style="{StaticResource settingsButtonStyle}" Content="Play"
-                Command="{Binding ShowGame}"/>
-    </StackPanel>
-    </Viewbox>
+                        <!--Flooding checkbox-->
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding Flooding.Value}" Style="{StaticResource checkBoxStyle}"/>
+                            <TextBlock Style="{StaticResource labelStyle}" Margin="10">Flooding</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
+                <!--Play button-->
+                <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4">
+                    <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource settingsButtonStyle}" Content="Play" Command="{Binding ShowGame}"/>
+                </Viewbox>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>
