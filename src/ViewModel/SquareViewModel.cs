@@ -9,9 +9,10 @@ namespace ViewModel
     public class SquareViewModel
     {
         private ICell<bool> Enabled { get; set; }
-        public SquareViewModel(ICell<IGame> game, Vector2D position)
+        public SquareViewModel(GameViewModel gameViewModel, Vector2D position)
         {
-            Game = game;
+            GameViewModel = gameViewModel;
+            ICell<IGame> game = gameViewModel.Game;
             Square = game.Derive(g => g.Board[position]);
             Enabled = game.Derive(g => g.IsSquareCovered(position));
             Status = game.Derive(g =>
@@ -25,7 +26,7 @@ namespace ViewModel
                 }
             });
 
-            Uncover = new UncoverSquareCommand(game, position, Enabled);
+            Uncover = new UncoverSquareCommand(gameViewModel, position, Enabled);
             Flag = new FlagSquareCommand(game, position, Enabled);
         }
         
@@ -33,7 +34,7 @@ namespace ViewModel
         public ICommand Uncover { get; }
         public ICommand Flag { get; }
 
-        public ICell<IGame> Game { get; }
+        public GameViewModel GameViewModel { get; }
         public ICell<SquareStatus> Status { get; set; }
     }
 }

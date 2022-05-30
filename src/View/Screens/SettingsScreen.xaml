@@ -266,13 +266,13 @@
                         </Grid.RowDefinitions>
                         <!--Row with slider and text field for width and height-->
                         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource labelStyle}">Size</TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Width.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
-                        <Slider Grid.Column="2" Grid.Row="0" Value="{Binding Width.Value}" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}" Style="{StaticResource sliderStyle}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Size.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
+                        <Slider Grid.Column="2" Grid.Row="0" Value="{Binding Size.Value}" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}" Style="{StaticResource sliderStyle}"/>
 
                         <!--Row with slider and text field for mine probability-->
                         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource labelStyle}">Mine %</TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Width.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
-                        <Slider Grid.Column="2" Grid.Row="1" Value="{Binding Width.Value}" Minimum="{Binding MinSize}" Maximum="{Binding MaxSize}" Style="{StaticResource sliderStyle}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding MineProbability.Value}" Style="{StaticResource labelStyle}" Margin="10"/>
+                        <Slider Grid.Column="2" Grid.Row="1" Value="{Binding MineProbability.Value}" Minimum="0" Maximum="90" Style="{StaticResource sliderStyle}"/>
 
                         <!--Flooding checkbox-->
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal">

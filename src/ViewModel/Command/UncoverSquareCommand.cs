@@ -8,16 +8,17 @@ namespace ViewModel.Command
 {
     public class UncoverSquareCommand : ICommand
     {
+        private ICell<bool> Enabled { get; set; }
+        private GameViewModel GameViewModel { get; set; }
         public ICell<IGame> Game { get; }
         public Vector2D Position { get; }
 
-        private ICell<bool> enabled { get; set; }
-
-        public UncoverSquareCommand(ICell<IGame> game, Vector2D position, ICell<bool> enabled)
+        public UncoverSquareCommand(GameViewModel gameViewModel, Vector2D position, ICell<bool> enabled)
         {
-            Game = game;
+            GameViewModel = gameViewModel;
+            Game = gameViewModel.Game;
             Position = position;
-            this.enabled = enabled;
+            Enabled = enabled;
             enabled.ValueChanged += () => CanExecuteChanged?.Invoke(null, new EventArgs());
         }
 
@@ -25,14 +26,39 @@ namespace ViewModel.Command
 
         public bool CanExecute(object? parameter)
         {
-            return enabled.Value;
+            return Enabled.Value;
         }
 
         public void Execute(object? parameter)
         {
             if (Game.Value.Status == GameStatus.InProgress)
             {
-                Game.Value = Game.Value.UncoverSquare(Position);
+
+                if (GameViewModel.FirstClick)
+                {
+                    while (true)
+                    {
+                        // Check if the first click is on a mine
+                        if (Game.Value.UncoverSquare(Position).Status == GameStatus.Lost)
+                        {
+                            Debug.WriteLine("You lost, generating new game...");
+                            // Generate a new game
+                            Settings s = GameViewModel.Settings;
+                            Game.Value = IGame.CreateRandom(s.Size, s.MineProbability, s.Flooding);
+                        }
+                        else
+                        {
+                            Debug.WriteLine("You didn't lose yet");
+                            Game.Value = Game.Value.UncoverSquare(Position);
+                            break;
+                        }
+                    }
+                    GameViewModel.FirstClick = false;
+                }
+                else
+                {
+                    Game.Value = Game.Value.UncoverSquare(Position);
+                }
             }
         }
     }

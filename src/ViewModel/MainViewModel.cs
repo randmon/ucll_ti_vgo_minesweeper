@@ -9,7 +9,7 @@ namespace ViewModel
         public MainViewModel()
         {
             CurrentScreen = Cell.Create<ScreenViewModel>(null);
-            var firstScreen = new SettingsScreenViewModel(CurrentScreen);
+            var firstScreen = new SettingsScreenViewModel(CurrentScreen, new Settings());
             CurrentScreen.Value = firstScreen;
         }
 
@@ -28,31 +28,40 @@ namespace ViewModel
 
     public class GameScreenViewModel : ScreenViewModel
     {
-        public GameScreenViewModel(ICell<ScreenViewModel> currentScreen, IGame game) : base(currentScreen)
+        private Settings Settings { get; set; }
+        public GameScreenViewModel(ICell<ScreenViewModel> currentScreen, Settings settings) : base(currentScreen)
         {
-            Game = new GameViewModel(game);
-
-            ShowSettings = new ActionCommand(() => CurrentScreen.Value = new SettingsScreenViewModel(this.CurrentScreen));
+            Settings = settings;
+            Game = new GameViewModel(Settings);
+            ShowSettings = new ActionCommand(() => CurrentScreen.Value = new SettingsScreenViewModel(CurrentScreen, settings));
         }
 
         public GameViewModel Game { get; }
-
         public ICommand ShowSettings { get; }
     }
 
     public class SettingsScreenViewModel : ScreenViewModel
     {
-        public ICell<int> Width { get; }
-        public ICell<bool> Flooding { get; }
-
+        public Settings Settings;
+        public ICell<int> Size { get; set; }
+        public ICell<int> MineProbability { get; set; }
+        public ICell<bool> Flooding { get; set; }
         public int MaxSize { get; }
         public int MinSize { get; }
 
-        public SettingsScreenViewModel(ICell<ScreenViewModel> currentScreen) : base(currentScreen)
+        public SettingsScreenViewModel(ICell<ScreenViewModel> currentScreen, Settings settings) : base(currentScreen)
         {
-            this.Width = Cell.Create<int>(10);
-            this.Flooding = Cell.Create<bool>(true);
+            if (settings == null)
+            {
+                Settings = new Settings();
+            } else
+            {
+                Settings = settings;
 
+            }
+            Size = Cell.Create<int>(Settings.Size);
+            MineProbability = Cell.Create<int>((int)(Settings.MineProbability * 100));
+            Flooding = Cell.Create<bool>(Settings.Flooding);
             this.MaxSize = IGame.MaximumBoardSize;
             this.MinSize = IGame.MinimumBoardSize;
 
@@ -62,9 +71,13 @@ namespace ViewModel
 
         private void StartGame()
         {
-            double mineProbability = 0.1;
-            var game = IGame.CreateRandom(Width.Value, mineProbability, Flooding.Value);
-            CurrentScreen.Value = new GameScreenViewModel(this.CurrentScreen, game);
+            // Save settings
+            Settings.Size = Size.Value;
+            Settings.MineProbability = MineProbability.Value / 100.0;
+            Settings.Flooding = Flooding.Value;
+            
+            // Change screen
+            CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
         }
 
     }
