@@ -67,9 +67,13 @@ namespace ViewModel
 
             ShowGame = new ActionCommand(StartGame);
             ShowEasy = new ActionCommand(StartEasy);
+            ShowIntermediate = new ActionCommand(StartIntermediate);
+            ShowHard = new ActionCommand(StartHard);
         }
         public ICommand ShowGame { get; }
         public ICommand ShowEasy { get; }
+        public ICommand ShowIntermediate { get; }
+        public ICommand ShowHard { get; }
 
         private void StartGame()
         {
@@ -87,7 +91,24 @@ namespace ViewModel
             Settings.Size = 10;
             Settings.MineProbability = 0.1;
             Settings.Flooding = true;
-            
+
+            CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
+        }
+
+        private void StartIntermediate()
+        {
+            Settings.Size = 15;
+            Settings.MineProbability = 0.2;
+            Settings.Flooding = true;
+
+            CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
+        }
+        private void StartHard()
+        {
+            Settings.Size = 20;
+            Settings.MineProbability = 0.35;
+            Settings.Flooding = false;
+
             CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
         }
 
