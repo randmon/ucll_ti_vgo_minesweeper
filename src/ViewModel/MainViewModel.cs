@@ -66,8 +66,10 @@ namespace ViewModel
             this.MinSize = IGame.MinimumBoardSize;
 
             ShowGame = new ActionCommand(StartGame);
+            ShowEasy = new ActionCommand(StartEasy);
         }
         public ICommand ShowGame { get; }
+        public ICommand ShowEasy { get; }
 
         private void StartGame()
         {
@@ -77,6 +79,15 @@ namespace ViewModel
             Settings.Flooding = Flooding.Value;
             
             // Change screen
+            CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
+        }
+
+        private void StartEasy()
+        {
+            Settings.Size = 10;
+            Settings.MineProbability = 0.1;
+            Settings.Flooding = true;
+            
             CurrentScreen.Value = new GameScreenViewModel(CurrentScreen, Settings);
         }
 
