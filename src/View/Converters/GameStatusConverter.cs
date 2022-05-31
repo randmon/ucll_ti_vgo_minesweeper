@@ -19,7 +19,7 @@ namespace View.Converters
                 GameStatus.InProgress => InProgress,
                 GameStatus.Won => Won,
                 GameStatus.Lost => Lost,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
             };
         }
 

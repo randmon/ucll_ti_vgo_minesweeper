@@ -7,6 +7,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
 <UserControl.Resources>
+    <converters:SquareStatusConverter x:Key="squareStatusToImage"
+                                    Flagged="/img/flag.png"
+                                    Mine="/img/mine.png"/>
+
+    <converters:SquareStatusConverter x:Key="squareStatusToText"
+                                    Uncovered="Visible"
+                                    Covered="Hidden"
+                                    Flagged="Hidden"
+                                    Mine="Hidden"/>
+
+    <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"
+                                        M0="" M1="1" M2="2" M3="3" M4="4" M5="5" M6="6" M7="7" M8="8"/>
+
+    <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToColor"
+                                        M0="Transparent" M1="#6A5ACD" M2="#8451A3" 
+                                        M3="#D12651" M4="#A7236B" M5="#7C2085" 
+                                        M6="#511D9F" M7="#295592" M8="#008C85"
+                                        />
+
+    <converters:GameStatusConverter x:Key="gameStatusToText"
+                                Lost="You Lost!"
+                                Won="You won!"/>
+
+    <converters:GameStatusConverter x:Key="gameStatusToTextVisibility"
+                                InProgress="Hidden"
+                                Lost="Visible"
+                                Won="Visible"/>
+
+        
     <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -37,7 +66,7 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.3" />
+                                    <VisualTransition GeneratedDuration="0:0:0.5" />
                                     <VisualTransition GeneratedDuration="0" To="Pressed" />
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" />
@@ -69,7 +98,6 @@
     <Style x:Key="numberStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="DarkSlateBlue"/>
         <Setter Property="FontFamily" Value="Courier New"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -119,29 +147,8 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
-    
-    <converters:SquareStatusConverter x:Key="squareStatusToImage"
-                                        Flagged="/img/flag.png"
-                                        Mine="/img/mine.png"/>
-    
-    <converters:SquareStatusConverter x:Key="squareStatusToText"
-                                        Uncovered="Visible"
-                                        Covered="Hidden"
-                                        Flagged="Hidden"
-                                        Mine="Hidden"/>
 
-    <converters:NeighbouringMinesConverter x:Key="neighbouringMinesToText"/>
-
-    <converters:GameStatusConverter x:Key="gameStatusToText"
-                                    Lost="You Lost!"
-                                    Won="You won!"/>
-    
-    <converters:GameStatusConverter x:Key="gameStatusToTextVisibility"
-                                    InProgress="Hidden"
-                                    Lost="Visible"
-                                    Won="Visible"/>
-
-    </UserControl.Resources>
+ </UserControl.Resources>
 <Grid Style="{StaticResource backgroundStyle}">
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -187,8 +194,9 @@
                                             <Button.Content>
                                                 <Grid>
                                                     <Image Source="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>
-                                                    <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
+                                                        <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
                                                             Style="{StaticResource numberStyle}"
+                                                            Foreground="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToColor}}"
                                                             Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
                                                 </Grid>
                                             </Button.Content>
