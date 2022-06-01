@@ -23,6 +23,7 @@
     <None Remove="img\flag.png" />
     <None Remove="img\flag1.png" />
     <None Remove="img\mine.png" />
+    <None Remove="img\mine.svg" />
     <None Remove="mine.png" />
   </ItemGroup>
 

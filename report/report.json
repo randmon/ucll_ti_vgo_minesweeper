@@ -1,12 +1,14 @@
 {
-    "first-name": "TODO",
-    "last-name": "TODO",
-    "github-url": "https://github.com/ucll-vgo2122/minesweeper-TODO",
+    "first-name": "Cristina",
+    "last-name": "Marques",
+    "github-url": "https://github.com/ucll-vgo2122/minesweeper-randmon",
     "framework": "WPF",
     "extensions": [
-        "TODO1",
-        "TODO2",
-        "TODO3",
-        "..."
+        "when mouse hovers over square, it lights up",
+        "Different font color depending of amount of neighboring mines",
+        "Animation on game grid buttons (for mouse-over and disabled)",
+        "Have the first uncovered square never contain a mine",
+        "Custom mine probability",
+        "Quickstart (preset board sizes)"
     ]
 }

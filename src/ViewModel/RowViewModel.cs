@@ -1,6 +1,4 @@
-﻿using Cells;
-using Model.Data;
-using Model.MineSweeper;
+﻿using Model.Data;
 
 namespace ViewModel
 {

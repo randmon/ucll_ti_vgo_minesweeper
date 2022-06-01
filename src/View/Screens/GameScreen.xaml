@@ -8,8 +8,8 @@
              d:DesignHeight="600" d:DesignWidth="800">
 <UserControl.Resources>
     <converters:SquareStatusConverter x:Key="squareStatusToImage"
-                                    Flagged="/img/flag.png"
-                                    Mine="/img/mine.png"/>
+                                Flagged="M622,173H480.023c-6.312,0-12.023-6.284-12.023-12.595V133c0-11.046-8.954-20-20-20H191h-1h-12    c-11.047,0-21,7.955-21,19.001v535c0,11.047,9.953,20.999,21,20.999h12.999c11.047,0,19.001-9.953,19.001-20.999V407h160h0.977    c5.487,0,9.95,3.781,11.023,9.369V447c0,11.046,8.954,20,20,20h220c11.046,0,20-8.954,20-20V193C642,181.954,633.046,173,622,173z    "
+                                Mine="M677,360v80c0,11.046-8.954,20-20,20h-39.604c-6.316,22.886-16.158,44.305-28.904,63.646l18.482,18.482    c7.812,7.812,7.812,20.474,0,28.285l-36.062,36.062c-7.812,7.812-20.474,7.812-28.284,0l-18.483-18.483    c-19.48,12.839-41.071,22.729-64.146,29.041V658c0,11.046-8.954,20-20,20h-80c-11.046,0-20-8.954-20-20v-41.238    c-22.698-6.322-43.945-16.116-63.145-28.77l-18.483,18.483c-7.812,7.811-20.474,7.811-28.285,0l-36.062-36.063    c-7.812-7.811-7.812-20.473,0-28.283l18.483-18.483c-12.746-19.341-22.588-40.76-28.905-63.646H142c-11.046,0-20-8.954-20-20v-80    c0-11.046,8.954-20,20-20h41.604c6.317-22.886,16.159-44.305,28.905-63.646l-18.483-18.483c-7.811-7.811-7.812-20.474,0-28.285    l36.063-36.062c7.811-7.811,20.473-7.811,28.283,0l18.483,18.484c19.2-12.654,40.447-22.448,63.146-28.77V143    c0-11.046,8.954-20,20-20h80c11.046,0,20,8.954,20,20v39.968c23.073,6.311,44.664,16.201,64.145,29.04l18.483-18.483    c7.812-7.811,20.475-7.811,28.285,0l36.063,36.063c7.811,7.811,7.811,20.473,0,28.284l-18.483,18.484    c12.746,19.34,22.587,40.759,28.904,63.645H657C668.046,340,677,348.954,677,360z M400,324.358    c-41.775,0-75.643,33.866-75.643,75.642c0,41.776,33.867,75.642,75.643,75.642c41.776,0,75.642-33.865,75.642-75.642    C475.642,358.224,441.776,324.358,400,324.358z"/>
 
     <converters:SquareStatusConverter x:Key="squareStatusToText"
                                     Uncovered="Visible"
@@ -73,22 +73,30 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" 
-                                                                        Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="White" />
+                                            Storyboard.TargetName="Border">
+                                                <EasingColorKeyFrame  KeyTime="0" Value="#d6dbff" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" 
+                                            Storyboard.TargetName="Border">
+                                                <EasingColorKeyFrame  KeyTime="0" Value="#d47dff" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
-                                                                        Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FFC5CBF9" />
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                                    Storyboard.TargetName="Border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#caf4fa" />
                                         </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                                    Storyboard.TargetName="Border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#c8c4ff" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+                        <ContentPresenter Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" SnapsToDevicePixels="True" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -193,11 +201,14 @@
                                             </Button.InputBindings>
                                             <Button.Content>
                                                 <Grid>
-                                                    <Image Source="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>
-                                                        <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
-                                                            Style="{StaticResource numberStyle}"
-                                                            Foreground="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToColor}}"
-                                                            Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
+                                                    <!--<Image Source="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>-->
+                                                    <Viewbox>
+                                                            <Path Width="800" Height="800" Fill="#434356" Data="{Binding Status.Value, Converter={StaticResource squareStatusToImage}}"/>  
+                                                    </Viewbox>
+                                                    <TextBlock Text="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToText}}" 
+                                                        Style="{StaticResource numberStyle}"
+                                                        Foreground="{Binding Square.Value.NeighboringMineCount, Converter={StaticResource neighbouringMinesToColor}}"
+                                                        Visibility="{Binding Square.Value.Status, Converter={StaticResource squareStatusToText}}"/>
                                                 </Grid>
                                             </Button.Content>
                                         </Button>
